@@ -1,6 +1,7 @@
 import express from "express";
 import dotenv from "dotenv";
 import cors from "cors";
+import prisma from "./lib/prisma.js";
 
 dotenv.config();
 
@@ -12,8 +13,9 @@ app.use(cors());
 
 
 
-app.get("/", (req, res) => {
-  res.send("Ai resume analyzer app running");
+app.get("/", async(req, res) => {
+  const users = await prisma.user.findMany();
+  res.json(users);
 });
 
 app.listen(PORT, () => {
