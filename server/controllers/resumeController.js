@@ -1,5 +1,6 @@
 import cloudinary from "../lib/cloudinary.js";
 import streamifier from "streamifier";
+import prisma from '../lib/prisma.js';
 export const uploadResume = async (req, res) => {
   if (!req.file) {
     return res.status(400).json({
@@ -12,19 +13,24 @@ export const uploadResume = async (req, res) => {
       resource_type: "raw",
       folder: "resume-analyzer",
     },
-    (error, result) => {
-      if(error)
-      {
-        console.log(error);
+    async (error, result) => {
 
+      if (error) {
         return res.status(500).json({
-          message : "Failed to upload resume",
-        })
+          message: "Failed to upload resume",
+        });
       }
 
+      const resume = await prisma.resume.create({
+        data: {
+          fileUrl: result.secure_url,
+          userId: req.user.id,
+        },
+      });
+
       return res.status(200).json({
-        message : "Resume uploaded successfully",
-        url : result.secure_url,
+        message: "Resume uploaded successfully",
+        resume,
       });
 
     }
