@@ -1,7 +1,7 @@
 import express from "express";
 import upload from "../middleware/uploadMiddleware.js";
 import { protect } from "../middleware/authMiddleware.js";
-import { uploadResume } from "../controllers/resumeController.js";
+import {  uploadResume, getUserResumes} from "../controllers/resumeController.js";
 
 
 const router = express.Router();
@@ -12,5 +12,7 @@ router.post(
   upload.single("resume"),
   uploadResume
 );
+
+router.get("/", protect, getUserResumes);
 
 export default router;

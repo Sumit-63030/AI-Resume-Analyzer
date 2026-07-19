@@ -15,9 +15,9 @@ app.use(express.json());
 app.use(cors());
 
 
-app.use(authRoutes);
-app.use(userRoutes);
-app.use(resumeRoutes);
+app.use("/api/auth", authRoutes);
+app.use("/api/users", userRoutes);
+app.use("/api/resume", resumeRoutes);
 
 app.get("/", async(req, res) => {
   const users = await prisma.user.findMany();

@@ -27,12 +27,15 @@ export const uploadResume = async (req, res) => {
       const extractedText = await extractTextFromPDF(req.file.buffer);
 
       const analysis = JSON.parse(await analyzeResume(extractedText));
-      
+
       console.log(analysis);
 
       const resume = await prisma.resume.create({
         data: {
           fileUrl: result.secure_url,
+          extractedText,
+          atsScore: analysis.atsScore,
+          analysis,
           userId: req.user.id,
         },
       });
@@ -47,4 +50,31 @@ export const uploadResume = async (req, res) => {
 
   streamifier.createReadStream(req.file.buffer).pipe(uploadStream);
 
+};
+
+export const getUserResumes = async (req, res) => {
+  try {
+    const resumes = await prisma.resume.findMany({
+      where: {
+        userId: req.user.id,
+      },
+      orderBy: {
+        createdAt: "desc",
+      },
+      select: {
+        id: true,
+        fileUrl: true,
+        atsScore: true,
+        createdAt: true,
+      },
+    });
+
+    return res.status(200).json(resumes);
+  } catch (error) {
+    console.log(error);
+
+    return res.status(500).json({
+      message: "Something went wrong",
+    });
+  }
 };

@@ -24,9 +24,14 @@ model User{
 }
 
 model Resume {
-  id String @id @default(uuid())
-  fileUrl String 
-  userId String
-  user User @relation(fields: [userId], references: [id])
-  createdAt DateTime @default(now())
+  id            String   @id @default(uuid())
+  fileUrl       String
+  extractedText String
+  atsScore      Int
+  analysis      Json
+
+  userId        String
+  user          User     @relation(fields: [userId], references: [id])
+
+  createdAt     DateTime @default(now())
 }
