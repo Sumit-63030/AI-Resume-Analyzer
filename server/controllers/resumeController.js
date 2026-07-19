@@ -2,6 +2,7 @@ import cloudinary from "../lib/cloudinary.js";
 import streamifier from "streamifier";
 import prisma from '../lib/prisma.js';
 import { extractTextFromPDF } from "../utils/pdfParser.js";
+import { analyzeResume } from "../services/aiService.js";
 
 export const uploadResume = async (req, res) => {
   if (!req.file) {
@@ -25,7 +26,9 @@ export const uploadResume = async (req, res) => {
 
       const extractedText = await extractTextFromPDF(req.file.buffer);
 
-      console.log(extractedText);
+      const analysis = JSON.parse(await analyzeResume(extractedText));
+      
+      console.log(analysis);
 
       const resume = await prisma.resume.create({
         data: {
