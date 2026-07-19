@@ -1,6 +1,8 @@
 import cloudinary from "../lib/cloudinary.js";
 import streamifier from "streamifier";
 import prisma from '../lib/prisma.js';
+import { extractTextFromPDF } from "../utils/pdfParser.js";
+
 export const uploadResume = async (req, res) => {
   if (!req.file) {
     return res.status(400).json({
@@ -20,6 +22,10 @@ export const uploadResume = async (req, res) => {
           message: "Failed to upload resume",
         });
       }
+
+      const extractedText = await extractTextFromPDF(req.file.buffer);
+
+      console.log(extractedText);
 
       const resume = await prisma.resume.create({
         data: {
