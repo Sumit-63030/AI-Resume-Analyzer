@@ -1,0 +1,68 @@
+.dashboard {
+  min-height: 100vh;
+  background: #f4f6f9;
+}
+
+.dashboard__container {
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 40px 20px;
+}
+
+.dashboard__welcome {
+  margin-bottom: 40px;
+}
+
+.dashboard__welcome h1 {
+  margin-bottom: 10px;
+}
+
+.dashboard__welcome p {
+  color: #666;
+}
+
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: #2563eb;
+  color: white;
+  padding: 18px 40px;
+}
+
+.navbar__logout {
+  background: white;
+  color: #2563eb;
+  border: none;
+  padding: 10px 18px;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+.upload-card,
+.resume-list {
+  background: white;
+  padding: 24px;
+  border-radius: 12px;
+  margin-bottom: 25px;
+  box-shadow: 0 2px 10px rgba(0,0,0,.08);
+}
+
+.upload-card input {
+  margin: 20px 0;
+}
+
+.upload-card button {
+  display: block;
+  padding: 12px 22px;
+  border: none;
+  background: #2563eb;
+  color: white;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+.resume-list__empty {
+  color: #777;
+  margin-top: 20px;
+}

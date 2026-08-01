@@ -28,7 +28,7 @@ function Register() {
     try {
       setLoading(true);
 
-      const response = await api.post("api/auth/register", formData);
+      const response = await api.post("/auth/register", formData);
 
       toast.success(response.data.message);
 
