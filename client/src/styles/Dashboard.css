@@ -1,68 +1,121 @@
 .dashboard {
   min-height: 100vh;
-  background: #f4f6f9;
+  background: #F8FAFC;
 }
 
 .dashboard__container {
-  max-width: 1000px;
+  max-width: 960px;
   margin: 0 auto;
-  padding: 40px 20px;
+  padding: 48px 24px 80px;
 }
 
 .dashboard__welcome {
-  margin-bottom: 40px;
+  margin-bottom: 36px;
 }
 
 .dashboard__welcome h1 {
-  margin-bottom: 10px;
+  margin: 0 0 8px;
+  font-size: 28px;
+  font-weight: 700;
+  color: #0F172A;
+  letter-spacing: -0.02em;
 }
 
 .dashboard__welcome p {
-  color: #666;
-}
-
-.navbar {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  background: #2563eb;
-  color: white;
-  padding: 18px 40px;
-}
-
-.navbar__logout {
-  background: white;
-  color: #2563eb;
-  border: none;
-  padding: 10px 18px;
-  border-radius: 8px;
-  cursor: pointer;
+  margin: 0;
+  font-size: 15px;
+  color: #64748B;
+  line-height: 1.5;
+  max-width: 480px;
 }
 
 .upload-card,
 .resume-list {
-  background: white;
-  padding: 24px;
-  border-radius: 12px;
-  margin-bottom: 25px;
-  box-shadow: 0 2px 10px rgba(0,0,0,.08);
+  background: #ffffff;
+  padding: 28px;
+  border-radius: 16px;
+  margin-bottom: 24px;
+  border: 1px solid #EEF1F6;
+  box-shadow: 0 1px 3px rgba(15, 23, 42, 0.04);
+}
+
+.upload-card h2,
+.resume-list h2 {
+  margin: 0 0 4px;
+  font-size: 17px;
+  font-weight: 700;
+  color: #0F172A;
 }
 
 .upload-card input {
-  margin: 20px 0;
+  display: block;
+  width: 100%;
+  margin: 18px 0;
+  padding: 10px 12px;
+  border: 1px solid #E2E8F0;
+  border-radius: 8px;
+  font-size: 14px;
+  box-sizing: border-box;
+}
+
+.upload-card input:focus {
+  outline: none;
+  border-color: #2563EB;
+  box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.12);
 }
 
 .upload-card button {
-  display: block;
-  padding: 12px 22px;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 11px 22px;
   border: none;
-  background: #2563eb;
+  background: #2563EB;
   color: white;
-  border-radius: 8px;
+  border-radius: 9px;
+  font-size: 14px;
+  font-weight: 600;
   cursor: pointer;
+  transition: background 0.2s ease, transform 0.15s ease;
+}
+
+.upload-card button:hover {
+  background: #1D4ED8;
+}
+
+.upload-card button:active {
+  transform: scale(0.98);
+}
+
+.upload-card button:disabled {
+  background: #CBD5E1;
+  cursor: not-allowed;
 }
 
 .resume-list__empty {
-  color: #777;
-  margin-top: 20px;
+  color: #94A3B8;
+  font-size: 14px;
+  margin-top: 16px;
+  padding: 24px;
+  text-align: center;
+  background: #F8FAFC;
+  border-radius: 10px;
+  border: 1px dashed #E2E8F0;
+}
+
+/* Responsive */
+@media (max-width: 640px) {
+  .dashboard__container {
+    padding: 32px 16px 60px;
+  }
+
+  .dashboard__welcome h1 {
+    font-size: 22px;
+  }
+
+  .upload-card,
+  .resume-list {
+    padding: 20px;
+    border-radius: 14px;
+  }
 }

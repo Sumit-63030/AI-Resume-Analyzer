@@ -1,6 +1,9 @@
 import { useState } from "react";
+import { UploadCloud } from "lucide-react";
 import api from "../services/api";
 import toast from "react-hot-toast";
+
+import "../styles/UploadCard.css";
 
 const UploadCard = ({ setAnalysis }) => {
   const [file, setFile] = useState(null);
@@ -43,12 +46,17 @@ const UploadCard = ({ setAnalysis }) => {
   };
 
   return (
-    <div className="upload-card">
+    <section className="upload">
+
+      <div className="upload__icon">
+        <UploadCloud size={34} />
+      </div>
+
       <h2>Upload Resume</h2>
 
       <p>
-        Upload your resume and receive an AI-powered ATS score
-        with personalized suggestions.
+        Upload your latest resume in PDF format to receive
+        an AI-powered ATS analysis.
       </p>
 
       <input
@@ -57,13 +65,20 @@ const UploadCard = ({ setAnalysis }) => {
         onChange={(e) => setFile(e.target.files[0])}
       />
 
+      {file && (
+        <span className="upload__filename">
+          {file.name}
+        </span>
+      )}
+
       <button
         onClick={handleUpload}
         disabled={loading}
       >
         {loading ? "Analyzing..." : "Analyze Resume"}
       </button>
-    </div>
+
+    </section>
   );
 };
 

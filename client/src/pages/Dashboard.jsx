@@ -1,42 +1,67 @@
+import { useState } from "react";
+import api from "../services/api";
+
 import Navbar from "../components/Navbar";
 import UploadCard from "../components/UploadCard";
-import ResumeList from "../components/ResumeList";
-import "../styles/Dashboard.css";
-import { useState } from "react";
 import AnalysisCard from "../components/AnalysisCard";
+import ResumeList from "../components/ResumeList";
+
+import "../styles/Dashboard.css";
 
 const Dashboard = () => {
   const user = JSON.parse(localStorage.getItem("user"));
+
   const [analysis, setAnalysis] = useState(null);
 
-  return (
-    <div className="dashboard">
+  const loadResume = async (id) => {
+    console.log("Clicked:", id);
+    try {
+      const response = await api.get(`/resume/${id}`, {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem("token")}`,
+        },
+      });
 
+      console.log("Resume from backend:", response.data);
+      
+
+      setAnalysis(response.data);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  return (
+    <>
       <Navbar />
 
-      <div className="dashboard__container">
+      <main className="dashboard">
 
-        <div className="dashboard__welcome">
+        <section className="dashboard__hero">
+
           <h1>
-            Welcome, {user?.name} 👋
+            Welcome back, <span>{user?.name}</span> 👋
           </h1>
 
           <p>
-            Upload your resume and receive an AI-powered
-            ATS score along with personalized feedback.
+            Upload your resume to receive an AI-powered ATS
+            analysis and review previous uploads anytime.
           </p>
-        </div>
+
+        </section>
 
         <UploadCard setAnalysis={setAnalysis} />
+
         {analysis && (
           <AnalysisCard analysis={analysis} />
         )}
-        <ResumeList />
 
-      </div>
+        <ResumeList onSelect={loadResume} />
 
-    </div>
+      </main>
+
+    </>
   );
 };
 
-export default Dashboard; 
+export default Dashboard;

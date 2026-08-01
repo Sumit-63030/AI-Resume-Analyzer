@@ -1,46 +1,78 @@
+import "../styles/AnalysisCard.css";
+
 const AnalysisCard = ({ analysis }) => {
   return (
-    <div className="analysis-card">
+    <section className="analysis">
 
-      <h2>ATS Score</h2>
+      <div className="analysis__score">
 
-      <div className="analysis-card__score">
-        {analysis.atsScore}%
+        <span>ATS SCORE</span>
+
+        <h1>{analysis.atsScore}%</h1>
+
+        <p>
+          {analysis.atsScore >= 85
+            ? "Excellent Resume 🚀"
+            : analysis.atsScore >= 70
+            ? "Good Resume 👍"
+            : "Needs Improvement 📄"}
+        </p>
+
       </div>
 
-      <h3>Strengths</h3>
+      <div className="analysis__grid">
 
-      <ul>
-        {analysis.analysis.strengths.map((item, index) => (
-          <li key={index}>{item}</li>
-        ))}
-      </ul>
+        <div className="analysis__card">
 
-      <h3>Weaknesses</h3>
+          <h2>🟢 Strengths</h2>
 
-      <ul>
-        {analysis.analysis.weaknesses.map((item, index) => (
-          <li key={index}>{item}</li>
-        ))}
-      </ul>
+          <ul>
+            {analysis.analysis.strengths.map((item, index) => (
+              <li key={index}>{item}</li>
+            ))}
+          </ul>
 
-      <h3>Missing Skills</h3>
+        </div>
 
-      <ul>
-        {analysis.analysis.missingSkills.map((item, index) => (
-          <li key={index}>{item}</li>
-        ))}
-      </ul>
+        <div className="analysis__card">
 
-      <h3>Suggestions</h3>
+          <h2>🔴 Weaknesses</h2>
 
-      <ul>
-        {analysis.analysis.suggestions.map((item, index) => (
-          <li key={index}>{item}</li>
-        ))}
-      </ul>
+          <ul>
+            {analysis.analysis.weaknesses.map((item, index) => (
+              <li key={index}>{item}</li>
+            ))}
+          </ul>
 
-    </div>
+        </div>
+
+        <div className="analysis__card">
+
+          <h2>🟡 Missing Skills</h2>
+
+          <ul>
+            {analysis.analysis.missingSkills.map((item, index) => (
+              <li key={index}>{item}</li>
+            ))}
+          </ul>
+
+        </div>
+
+        <div className="analysis__card">
+
+          <h2>🔵 Suggestions</h2>
+
+          <ul>
+            {analysis.analysis.suggestions.map((item, index) => (
+              <li key={index}>{item}</li>
+            ))}
+          </ul>
+
+        </div>
+
+      </div>
+
+    </section>
   );
 };
 

@@ -1,0 +1,104 @@
+.navbar{
+
+    height:80px;
+
+    background:#ffffff;
+
+    border-bottom:1px solid #E5E7EB;
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+
+    padding:0 55px;
+
+    position:sticky;
+
+    top:0;
+
+    z-index:999;
+
+    box-shadow:0 4px 18px rgba(0,0,0,.05);
+}
+
+.navbar__brand{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:15px;
+}
+
+.navbar__logo{
+
+    width:48px;
+
+    height:48px;
+
+    border-radius:14px;
+
+    background:#2563EB;
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    color:white;
+
+    box-shadow:0 10px 18px rgba(37,99,235,.30);
+}
+
+.navbar__brand h2{
+
+    font-size:22px;
+
+    font-weight:700;
+
+    color:#111827;
+}
+
+.navbar__brand span{
+
+    font-size:13px;
+
+    color:#6B7280;
+}
+
+.navbar__logout{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:8px;
+
+    padding:12px 22px;
+
+    background:#EF4444;
+
+    color:white;
+
+    border:none;
+
+    border-radius:10px;
+
+    cursor:pointer;
+
+    font-size:15px;
+
+    font-weight:600;
+
+    transition:.25s;
+}
+
+.navbar__logout:hover{
+
+    background:#DC2626;
+
+    transform:translateY(-2px);
+}
