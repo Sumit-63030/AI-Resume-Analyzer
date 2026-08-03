@@ -14,17 +14,13 @@ const Dashboard = () => {
   const [analysis, setAnalysis] = useState(null);
 
   const loadResume = async (id) => {
-    console.log("Clicked:", id);
     try {
       const response = await api.get(`/resume/${id}`, {
         headers: {
           Authorization: `Bearer ${localStorage.getItem("token")}`,
         },
       });
-
-      console.log("Resume from backend:", response.data);
       
-
       setAnalysis(response.data);
     } catch (error) {
       console.log(error);
