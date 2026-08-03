@@ -5,13 +5,15 @@ import Navbar from "../components/Navbar";
 import UploadCard from "../components/UploadCard";
 import AnalysisCard from "../components/AnalysisCard";
 import ResumeList from "../components/ResumeList";
-
 import "../styles/Dashboard.css";
+import JobMatchCard from "../components/JobMatchCard";
+import JobMatchResult from "../components/JobMatchResult";
 
 const Dashboard = () => {
   const user = JSON.parse(localStorage.getItem("user"));
 
   const [analysis, setAnalysis] = useState(null);
+  const [jobMatch, setJobMatch] = useState(null);
 
   const loadResume = async (id) => {
     try {
@@ -20,7 +22,7 @@ const Dashboard = () => {
           Authorization: `Bearer ${localStorage.getItem("token")}`,
         },
       });
-      
+
       setAnalysis(response.data);
     } catch (error) {
       console.log(error);
@@ -45,11 +47,16 @@ const Dashboard = () => {
           </p>
 
         </section>
-
         <UploadCard setAnalysis={setAnalysis} />
 
         {analysis && (
           <AnalysisCard analysis={analysis} />
+        )}
+
+        <JobMatchCard setJobMatch={setJobMatch} />
+
+        {jobMatch && (
+          <JobMatchResult jobMatch={jobMatch} />
         )}
 
         <ResumeList onSelect={loadResume} />
