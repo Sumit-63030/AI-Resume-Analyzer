@@ -1,121 +1,116 @@
+/* ===========================
+   Dashboard Layout
+=========================== */
+
 .dashboard {
-  min-height: 100vh;
-  background: #F8FAFC;
-}
-
-.dashboard__container {
-  max-width: 960px;
+  max-width: 1200px;
   margin: 0 auto;
-  padding: 48px 24px 80px;
+  padding: 32px 24px 64px;
+  min-height: 100vh;
+  background: #f7f9fc;
 }
 
-.dashboard__welcome {
-  margin-bottom: 36px;
+/* ===========================
+   Hero
+=========================== */
+
+.dashboard__hero {
+  margin-bottom: 32px;
 }
 
-.dashboard__welcome h1 {
-  margin: 0 0 8px;
-  font-size: 28px;
+.dashboard__hero-title {
+  font-size: 2.5rem;
   font-weight: 700;
-  color: #0F172A;
-  letter-spacing: -0.02em;
+  color: #111827;
+  margin-bottom: 12px;
 }
 
-.dashboard__welcome p {
-  margin: 0;
-  font-size: 15px;
-  color: #64748B;
-  line-height: 1.5;
-  max-width: 480px;
+.dashboard__hero-name {
+  color: #2563eb;
 }
 
-.upload-card,
-.resume-list {
-  background: #ffffff;
-  padding: 28px;
-  border-radius: 16px;
-  margin-bottom: 24px;
-  border: 1px solid #EEF1F6;
-  box-shadow: 0 1px 3px rgba(15, 23, 42, 0.04);
+.dashboard__hero-description {
+  font-size: 1.05rem;
+  color: #6b7280;
+  max-width: 720px;
+  line-height: 1.8;
 }
 
-.upload-card h2,
-.resume-list h2 {
-  margin: 0 0 4px;
-  font-size: 17px;
-  font-weight: 700;
-  color: #0F172A;
+/* ===========================
+   Section spacing only
+=========================== */
+
+.dashboard__upload-card,
+.dashboard__analysis-card,
+.dashboard__job-match-card,
+.dashboard__job-match-result,
+.dashboard__resume-list {
+  margin-bottom: 28px;
+  animation: fadeUp .4s ease;
 }
 
-.upload-card input {
-  display: block;
-  width: 100%;
-  margin: 18px 0;
-  padding: 10px 12px;
-  border: 1px solid #E2E8F0;
-  border-radius: 8px;
-  font-size: 14px;
-  box-sizing: border-box;
-}
+/* ===========================
+   Animation
+=========================== */
 
-.upload-card input:focus {
-  outline: none;
-  border-color: #2563EB;
-  box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.12);
-}
+@keyframes fadeUp {
 
-.upload-card button {
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-  padding: 11px 22px;
-  border: none;
-  background: #2563EB;
-  color: white;
-  border-radius: 9px;
-  font-size: 14px;
-  font-weight: 600;
-  cursor: pointer;
-  transition: background 0.2s ease, transform 0.15s ease;
-}
-
-.upload-card button:hover {
-  background: #1D4ED8;
-}
-
-.upload-card button:active {
-  transform: scale(0.98);
-}
-
-.upload-card button:disabled {
-  background: #CBD5E1;
-  cursor: not-allowed;
-}
-
-.resume-list__empty {
-  color: #94A3B8;
-  font-size: 14px;
-  margin-top: 16px;
-  padding: 24px;
-  text-align: center;
-  background: #F8FAFC;
-  border-radius: 10px;
-  border: 1px dashed #E2E8F0;
-}
-
-/* Responsive */
-@media (max-width: 640px) {
-  .dashboard__container {
-    padding: 32px 16px 60px;
+  from {
+    opacity: 0;
+    transform: translateY(18px);
   }
 
-  .dashboard__welcome h1 {
-    font-size: 22px;
+  to {
+    opacity: 1;
+    transform: translateY(0);
   }
 
-  .upload-card,
-  .resume-list {
-    padding: 20px;
-    border-radius: 14px;
+}
+
+.dashboard__upload-card {
+  animation-delay: .05s;
+}
+
+.dashboard__analysis-card {
+  animation-delay: .1s;
+}
+
+.dashboard__job-match-card {
+  animation-delay: .15s;
+}
+
+.dashboard__job-match-result {
+  animation-delay: .2s;
+}
+
+.dashboard__resume-list {
+  animation-delay: .25s;
+}
+
+/* ===========================
+   Responsive
+=========================== */
+
+@media (max-width: 768px) {
+
+  .dashboard {
+    padding: 20px 16px 40px;
   }
+
+  .dashboard__hero-title {
+    font-size: 2rem;
+  }
+
+  .dashboard__hero-description {
+    font-size: .95rem;
+  }
+
+}
+
+@media (max-width: 480px) {
+
+  .dashboard__hero-title {
+    font-size: 1.6rem;
+  }
+
 }

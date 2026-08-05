@@ -26,8 +26,14 @@ export const uploadResume = async (req, res) => {
 
       const extractedText = await extractTextFromPDF(req.file.buffer);
 
-      const analysis = JSON.parse(await analyzeResume(extractedText));
+      const aiResponse = await analyzeResume(extractedText);
 
+      const cleanedResponse = aiResponse
+        .replace(/```json/g, "")
+        .replace(/```/g, "")
+        .trim();
+
+      const analysis = JSON.parse(cleanedResponse);
       console.log(analysis);
 
       const resume = await prisma.resume.create({
@@ -97,6 +103,42 @@ export const getResumeById = async (req, res) => {
     }
 
     return res.status(200).json(resume);
+  } catch (error) {
+    console.log(error);
+
+    return res.status(500).json({
+      message: "Something went wrong",
+    });
+  }
+};
+
+export const deleteResume = async (req, res) => {
+  try {
+    const { id } = req.params;
+
+    const resume = await prisma.resume.findFirst({
+      where: {
+        id,
+        userId: req.user.id,
+      },
+    });
+
+    if (!resume) {
+      return res.status(404).json({
+        message: "Resume not found",
+      });
+    }
+
+    await prisma.resume.delete({
+      where: {
+        id,
+      },
+    });
+
+    return res.status(200).json({
+      message: "Resume deleted successfully",
+    });
+
   } catch (error) {
     console.log(error);
 

@@ -1,0 +1,76 @@
+.job-result {
+  margin-top: 30px;
+}
+
+.job-result__score {
+  background: linear-gradient(135deg, #2563eb, #4f46e5);
+  color: white;
+  border-radius: 20px;
+  padding: 35px;
+  text-align: center;
+  margin-bottom: 25px;
+  box-shadow: 0 12px 35px rgba(37, 99, 235, 0.25);
+}
+
+.job-result__score span {
+  display: block;
+  font-size: 0.9rem;
+  letter-spacing: 2px;
+  opacity: 0.9;
+}
+
+.job-result__score h1 {
+  font-size: 4rem;
+  margin: 10px 0;
+  font-weight: 700;
+}
+
+.job-result__score p {
+  font-size: 1rem;
+  opacity: 0.95;
+}
+
+.job-result__grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: 20px;
+}
+
+.job-result__card {
+  background: white;
+  border-radius: 18px;
+  padding: 24px;
+  box-shadow: 0 8px 24px rgba(0,0,0,0.08);
+  transition: transform .2s ease, box-shadow .2s ease;
+}
+
+.job-result__card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 14px 35px rgba(0,0,0,.12);
+}
+
+.job-result__card h2 {
+  margin-bottom: 18px;
+  color: #1f2937;
+}
+
+.job-result__card ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.job-result__card li {
+  padding: 10px 0;
+  border-bottom: 1px solid #ececec;
+  color: #555;
+}
+
+.job-result__card li:last-child {
+  border-bottom: none;
+}
+
+.job-result__summary p {
+  line-height: 1.8;
+  color: #555;
+}

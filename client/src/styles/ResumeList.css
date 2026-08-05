@@ -67,3 +67,26 @@
 
   text-align: center;
 }
+
+.resume-list__header{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+}
+
+.resume-list__content{
+    flex:1;
+    cursor:pointer;
+}
+
+.resume-list__delete{
+    border:none;
+    background:transparent;
+    cursor:pointer;
+    font-size:18px;
+    transition:.2s;
+}
+
+.resume-list__delete:hover{
+    transform:scale(1.2);
+}

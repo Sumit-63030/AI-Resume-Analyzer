@@ -2,7 +2,6 @@ import { useState } from "react";
 import { UploadCloud } from "lucide-react";
 import api from "../services/api";
 import toast from "react-hot-toast";
-
 import "../styles/UploadCard.css";
 
 const UploadCard = ({ setAnalysis }) => {
@@ -46,34 +45,55 @@ const UploadCard = ({ setAnalysis }) => {
   };
 
   return (
-    <section className="upload">
+    <section className="upload-card">
 
-      <div className="upload__icon">
-        <UploadCloud size={34} />
+      <div className="upload-card__icon-wrapper">
+        <UploadCloud
+          className="upload-card__icon"
+          size={40}
+        />
       </div>
 
-      <h2>Upload Resume</h2>
+      <h2 className="upload-card__title">
+        Upload Resume
+      </h2>
 
-      <p>
+      <p className="upload-card__description">
         Upload your latest resume in PDF format to receive
         an AI-powered ATS analysis.
       </p>
 
-      <input
-        type="file"
-        accept=".pdf"
-        onChange={(e) => setFile(e.target.files[0])}
-      />
+      <div className="upload-card__input-wrapper">
+        <input
+          type="file"
+          accept=".pdf"
+          id="file-upload"
+          className="upload-card__input"
+          onChange={(e) => setFile(e.target.files[0])}
+        />
+
+        <label
+          htmlFor="file-upload"
+          className="upload-card__input-label"
+        >
+          Select Resume (.pdf)
+        </label>
+      </div>
 
       {file && (
-        <span className="upload__filename">
+        <span className="upload-card__filename">
           {file.name}
         </span>
       )}
 
+      <p className="upload-card__helper">
+        Supported format: PDF • Max size: 5 MB
+      </p>
+
       <button
         onClick={handleUpload}
         disabled={loading}
+        className="upload-card__button"
       >
         {loading ? "Analyzing..." : "Analyze Resume"}
       </button>

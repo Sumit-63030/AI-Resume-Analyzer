@@ -25,13 +25,19 @@ export const matchJob = async (req, res) => {
         message: "Please upload a resume first",
       });
     }
-
-    const result = await analyzeJobMatch(
+    const aiResponse = await analyzeJobMatch(
       latestResume.extractedText,
       jobDescription
     );
 
-    return res.status(200).json(JSON.parse(result));
+    const cleanedResponse = aiResponse
+      .replace(/```json/g, "")
+      .replace(/```/g, "")
+      .trim();
+
+    const match = JSON.parse(cleanedResponse);
+
+    return res.status(200).json(match);
 
   } catch (error) {
     console.log(error);

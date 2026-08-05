@@ -34,35 +34,41 @@ const Dashboard = () => {
       <Navbar />
 
       <main className="dashboard">
-
         <section className="dashboard__hero">
-
-          <h1>
-            Welcome back, <span>{user?.name}</span> 👋
+          <h1 className="dashboard__hero-title">
+            Welcome back, <span className="dashboard__hero-name">{user?.name}</span> 👋
           </h1>
-
-          <p>
-            Upload your resume to receive an AI-powered ATS
-            analysis and review previous uploads anytime.
+          <p className="dashboard__hero-description">
+            Upload your resume, receive an AI-powered ATS score,
+            compare it against real job descriptions, and improve
+            your chances of landing interviews.
           </p>
+        </section>  
 
-        </section>
-        <UploadCard setAnalysis={setAnalysis} />
+        <div className="dashboard__upload-card">
+          <UploadCard setAnalysis={setAnalysis} />
+        </div>
 
         {analysis && (
-          <AnalysisCard analysis={analysis} />
+          <div className="dashboard__analysis-card">
+            <AnalysisCard analysis={analysis} />
+          </div>
         )}
 
-        <JobMatchCard setJobMatch={setJobMatch} />
+        <div className="dashboard__job-match-card">
+          <JobMatchCard setJobMatch={setJobMatch} />
+        </div>
 
         {jobMatch && (
-          <JobMatchResult jobMatch={jobMatch} />
+          <div className="dashboard__job-match-result">
+            <JobMatchResult jobMatch={jobMatch} />
+          </div>
         )}
 
-        <ResumeList onSelect={loadResume} />
-
+        <div className="dashboard__resume-list">
+          <ResumeList onSelect={loadResume} />
+        </div>
       </main>
-
     </>
   );
 };
