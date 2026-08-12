@@ -1,116 +1,191 @@
-/* ===========================
-   Dashboard Layout
-=========================== */
-
 .dashboard {
-  max-width: 1200px;
+  max-width: 1280px;
   margin: 0 auto;
-  padding: 32px 24px 64px;
+  padding: 2rem 2rem 4rem;
   min-height: 100vh;
-  background: #f7f9fc;
+  background: #f8f9fc;
 }
 
-/* ===========================
-   Hero
-=========================== */
-
 .dashboard__hero {
-  margin-bottom: 32px;
+  background: #ffffff;
+  border-radius: 16px;
+  padding: 2.5rem 3rem;
+  margin-bottom: 2.5rem;
+  border: 1px solid #e8ecf1;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 2rem;
+  transition: all 0.25s ease;
+}
+
+.dashboard__hero:hover {
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.06);
+  border-color: #d0d7e2;
+}
+
+.dashboard__hero-content {
+  flex: 1;
 }
 
 .dashboard__hero-title {
-  font-size: 2.5rem;
-  font-weight: 700;
-  color: #111827;
-  margin-bottom: 12px;
+  font-size: 2.2rem;
+  font-weight: 600;
+  margin: 0 0 0.5rem 0;
+  letter-spacing: -0.02em;
+  color: #1a1a2e;
 }
 
 .dashboard__hero-name {
-  color: #2563eb;
+  color: #4a90e2;
+  font-weight: 700;
 }
 
 .dashboard__hero-description {
   font-size: 1.05rem;
-  color: #6b7280;
-  max-width: 720px;
-  line-height: 1.8;
+  color: #5a6a7e;
+  line-height: 1.6;
+  max-width: 700px;
+  margin: 0;
 }
 
-/* ===========================
-   Section spacing only
-=========================== */
+.dashboard__hero-avatar {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 64px;
+  height: 64px;
+  background: linear-gradient(135deg, #4a90e2, #357abd);
+  border-radius: 50%;
+  color: #ffffff;
+  font-size: 1.5rem;
+  font-weight: 600;
+  flex-shrink: 0;
+  box-shadow: 0 4px 12px rgba(74, 144, 226, 0.25);
+}
+
+.dashboard__hero-avatar-text {
+  text-transform: uppercase;
+}
+
+.dashboard__cards {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
 
 .dashboard__upload-card,
 .dashboard__analysis-card,
 .dashboard__job-match-card,
 .dashboard__job-match-result,
 .dashboard__resume-list {
-  margin-bottom: 28px;
-  animation: fadeUp .4s ease;
+  animation: fadeInUp 0.4s ease forwards;
 }
 
-/* ===========================
-   Animation
-=========================== */
+.dashboard__upload-card {
+  animation-delay: 0.05s;
+}
 
-@keyframes fadeUp {
+.dashboard__analysis-card {
+  animation-delay: 0.1s;
+}
 
+.dashboard__job-match-card {
+  animation-delay: 0.15s;
+}
+
+.dashboard__job-match-result {
+  animation-delay: 0.2s;
+}
+
+.dashboard__resume-list {
+  animation-delay: 0.25s;
+}
+
+@keyframes fadeInUp {
   from {
     opacity: 0;
-    transform: translateY(18px);
+    transform: translateY(16px);
   }
-
   to {
     opacity: 1;
     transform: translateY(0);
   }
-
 }
 
-.dashboard__upload-card {
-  animation-delay: .05s;
-}
-
-.dashboard__analysis-card {
-  animation-delay: .1s;
-}
-
-.dashboard__job-match-card {
-  animation-delay: .15s;
-}
-
-.dashboard__job-match-result {
-  animation-delay: .2s;
-}
-
-.dashboard__resume-list {
-  animation-delay: .25s;
-}
-
-/* ===========================
-   Responsive
-=========================== */
-
-@media (max-width: 768px) {
-
+@media (max-width: 1024px) {
   .dashboard {
-    padding: 20px 16px 40px;
+    padding: 1.5rem;
+  }
+
+  .dashboard__hero {
+    padding: 2rem;
   }
 
   .dashboard__hero-title {
-    font-size: 2rem;
+    font-size: 1.8rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .dashboard {
+    padding: 1rem;
+  }
+
+  .dashboard__hero {
+    padding: 1.5rem;
+    flex-direction: column;
+    text-align: center;
+    gap: 1.25rem;
+  }
+
+  .dashboard__hero-title {
+    font-size: 1.5rem;
   }
 
   .dashboard__hero-description {
-    font-size: .95rem;
+    font-size: 0.95rem;
+    margin: 0 auto;
   }
 
+  .dashboard__hero-avatar {
+    width: 56px;
+    height: 56px;
+    font-size: 1.25rem;
+  }
+
+  .dashboard__cards {
+    gap: 1.25rem;
+  }
 }
 
 @media (max-width: 480px) {
-
-  .dashboard__hero-title {
-    font-size: 1.6rem;
+  .dashboard {
+    padding: 0.75rem;
   }
 
+  .dashboard__hero {
+    padding: 1.25rem;
+    border-radius: 12px;
+  }
+
+  .dashboard__hero-title {
+    font-size: 1.25rem;
+  }
+
+  .dashboard__hero-description {
+    font-size: 0.85rem;
+    line-height: 1.5;
+  }
+
+  .dashboard__hero-avatar {
+    width: 48px;
+    height: 48px;
+    font-size: 1rem;
+  }
+
+  .dashboard__cards {
+    gap: 1rem;
+  }
 }

@@ -24,20 +24,45 @@ export const uploadResume = async (req, res) => {
         });
       }
 
-      const extractedText = await extractTextFromPDF(req.file.buffer);
+   const extractedText = await extractTextFromPDF(req.file.buffer);
 
-      const aiResponse = await analyzeResume(extractedText);
+let analysis;
 
-      const cleanedResponse = aiResponse
-        .replace(/```json/g, "")
-        .replace(/```/g, "")
-        .trim();
+try {
+  const aiResponse = await analyzeResume(extractedText);
 
-      const analysis = JSON.parse(cleanedResponse);
+  const cleanedResponse = aiResponse
+    .replace(/```json/g, "")
+    .replace(/```/g, "")
+    .trim();
+
+  analysis = JSON.parse(cleanedResponse);
+} catch (error) {
+  console.error("Gemini Error:", error);
+
+  if (error.status === 429) {
+    return res.status(429).json({
+      message:
+        "AI quota exceeded. Please wait a minute and try again.",
+    });
+  }
+
+  if (error.status === 503) {
+    return res.status(503).json({
+      message:
+        "AI service is temporarily busy. Please try again in a few moments.",
+    });
+  }
+
+  return res.status(500).json({
+    message: "Failed to analyze resume.",
+  });
+}
       console.log(analysis);
 
       const resume = await prisma.resume.create({
         data: {
+          fileName: req.file.originalname,
           fileUrl: result.secure_url,
           extractedText,
           atsScore: analysis.atsScore,
@@ -69,6 +94,7 @@ export const getUserResumes = async (req, res) => {
       },
       select: {
         id: true,
+        fileName: true,
         fileUrl: true,
         atsScore: true,
         createdAt: true,

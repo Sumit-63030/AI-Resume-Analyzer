@@ -1,12 +1,14 @@
-import { useState } from "react";
+import { useState, useRef } from "react";
 import { UploadCloud } from "lucide-react";
 import api from "../services/api";
 import toast from "react-hot-toast";
 import "../styles/UploadCard.css";
 
-const UploadCard = ({ setAnalysis }) => {
+const UploadCard = ({ setAnalysis, onUploadSuccess }) => {
   const [file, setFile] = useState(null);
   const [loading, setLoading] = useState(false);
+
+  const fileInputRef = useRef(null);
 
   const handleUpload = async () => {
     if (!file) {
@@ -34,7 +36,16 @@ const UploadCard = ({ setAnalysis }) => {
 
       toast.success(response.data.message);
 
+      // Reset React state
       setFile(null);
+
+      // Reset the actual file input
+      if (fileInputRef.current) {
+        fileInputRef.current.value = "";
+      }
+
+      // Refresh Previous Analyses
+      onUploadSuccess?.();
     } catch (error) {
       toast.error(
         error.response?.data?.message || "Upload failed."
@@ -46,7 +57,6 @@ const UploadCard = ({ setAnalysis }) => {
 
   return (
     <section className="upload-card">
-
       <div className="upload-card__icon-wrapper">
         <UploadCloud
           className="upload-card__icon"
@@ -59,12 +69,13 @@ const UploadCard = ({ setAnalysis }) => {
       </h2>
 
       <p className="upload-card__description">
-        Upload your latest resume in PDF format to receive
-        an AI-powered ATS analysis.
+        Upload your latest resume in PDF format to receive an
+        AI-powered ATS analysis.
       </p>
 
       <div className="upload-card__input-wrapper">
         <input
+          ref={fileInputRef}
           type="file"
           accept=".pdf"
           id="file-upload"
@@ -97,7 +108,6 @@ const UploadCard = ({ setAnalysis }) => {
       >
         {loading ? "Analyzing..." : "Analyze Resume"}
       </button>
-
     </section>
   );
 };

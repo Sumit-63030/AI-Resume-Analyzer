@@ -7,7 +7,6 @@ You are an expert ATS Resume Analyzer.
 Analyze the following resume and return ONLY valid JSON.
 
 Return this exact format:
-
 {
   "atsScore": number,
   "strengths": [],
@@ -20,12 +19,30 @@ Resume:
 ${resumeText}
 `;
 
-  const response = await ai.models.generateContent({
-    model: "gemini-flash-latest",
-    contents: prompt,
-  });
+  try {
+    const response = await ai.models.generateContent({
+      model: "gemini-flash-latest",
+      contents: prompt,
+    });
 
-  return response.text;
+    return response.text;
+  } catch (error) {
+    console.error("Gemini Error:", error);
+
+    if (error.status === 429) {
+      throw new Error(
+        "AI rate limit exceeded. Please wait 30 seconds and try again."
+      );
+    }
+
+    if (error.status === 503) {
+      throw new Error(
+        "AI service is temporarily busy. Please try again in a minute."
+      );
+    }
+
+    throw new Error("Failed to analyze resume.");
+  }
 };
 
 export const analyzeJobMatch = async (resumeText, jobDescription) => {
@@ -58,13 +75,32 @@ Rules:
 - missingSkills should contain important skills mentioned in the job description but missing from the resume.
 - summary should be 2-3 concise sentences.
 - recommendations should contain 4-6 actionable improvements.
-- Return ONLY valid JSON.
+
+Return ONLY valid JSON.
 `;
 
-  const response = await ai.models.generateContent({
-    model: "gemini-flash-latest",
-    contents: prompt,
-  });
+  try {
+    const response = await ai.models.generateContent({
+      model: "gemini-flash-latest",
+      contents: prompt,
+    });
 
-  return response.text;
+    return response.text;
+  } catch (error) {
+    console.error("Gemini Error:", error);
+
+    if (error.status === 429) {
+      throw new Error(
+        "AI rate limit exceeded. Please wait 30 seconds and try again."
+      );
+    }
+
+    if (error.status === 503) {
+      throw new Error(
+        "AI service is temporarily busy. Please try again in a minute."
+      );
+    }
+
+    throw new Error("Failed to analyze job match.");
+  }
 };
