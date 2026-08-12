@@ -24,40 +24,40 @@ export const uploadResume = async (req, res) => {
         });
       }
 
-   const extractedText = await extractTextFromPDF(req.file.buffer);
+      const extractedText = await extractTextFromPDF(req.file.buffer);
 
-let analysis;
+      let analysis;
 
-try {
-  const aiResponse = await analyzeResume(extractedText);
+      try {
+        const aiResponse = await analyzeResume(extractedText);
 
-  const cleanedResponse = aiResponse
-    .replace(/```json/g, "")
-    .replace(/```/g, "")
-    .trim();
+        const cleanedResponse = aiResponse
+          .replace(/```json/g, "")
+          .replace(/```/g, "")
+          .trim();
 
-  analysis = JSON.parse(cleanedResponse);
-} catch (error) {
-  console.error("Gemini Error:", error);
+        analysis = JSON.parse(cleanedResponse);
+      } catch (error) {
+        console.error("Gemini Error:", error);
 
-  if (error.status === 429) {
-    return res.status(429).json({
-      message:
-        "AI quota exceeded. Please wait a minute and try again.",
-    });
-  }
+        if (error.status === 429) {
+          return res.status(429).json({
+            message:
+              "AI quota exceeded. Please wait a minute and try again.",
+          });
+        }
 
-  if (error.status === 503) {
-    return res.status(503).json({
-      message:
-        "AI service is temporarily busy. Please try again in a few moments.",
-    });
-  }
+        if (error.status === 503) {
+          return res.status(503).json({
+            message:
+              "AI service is temporarily busy. Please try again in a few moments.",
+          });
+        }
 
-  return res.status(500).json({
-    message: "Failed to analyze resume.",
-  });
-}
+        return res.status(500).json({
+          message: "Failed to analyze resume.",
+        });
+      }
       console.log(analysis);
 
       const resume = await prisma.resume.create({
@@ -103,7 +103,7 @@ export const getUserResumes = async (req, res) => {
 
     return res.status(200).json(resumes);
   } catch (error) {
-    console.log(error);
+    console.error("GET USER RESUMES ERROR:", error);
 
     return res.status(500).json({
       message: "Something went wrong",
