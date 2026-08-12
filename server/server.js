@@ -20,9 +20,10 @@ app.use("/api/users", userRoutes);
 app.use("/api/resume", resumeRoutes);
 app.use("/api/job-match", jobMatchRoutes);
 
-app.get("/", async(req, res) => {
-  const users = await prisma.user.findMany();
-  res.json(users);
+app.get("/", (req, res) => {
+  res.json({
+    message: "AI Resume Analyzer API is running",
+  });
 });
 
 
