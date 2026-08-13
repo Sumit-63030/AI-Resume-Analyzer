@@ -390,7 +390,6 @@ The application implements several security practices:
 ## 👨‍💻 Author
 
 **Sumit Mahesh Dharmadhikari**
-Computer Science Engineering Student
 
 📦 GitHub: https://github.com/Sumit-63030
 🌐 Project: https://ai-resume-analyzer-gu2l84hqz.vercel.app/
