@@ -1,7 +1,7 @@
 import { useState, useRef } from "react";
 import api from "../services/api";
 
-import Navbar from "../components/Navbar";
+import Navbar from "../components/NavBar";
 import UploadCard from "../components/UploadCard";
 import AnalysisCard from "../components/AnalysisCard";
 import ResumeList from "../components/ResumeList";
