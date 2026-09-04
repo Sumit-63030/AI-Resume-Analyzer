@@ -350,17 +350,6 @@ https://ai-resume-analyzer-gu2l84hqz.vercel.app/
 
 ---
 
-## 📸 Screenshots
-
-Screenshots can be added here to showcase the application.
-
-- **Login** — Add screenshot here
-- **Dashboard** — Add screenshot here
-- **Resume Analysis** — Add screenshot here
-- **Job Matching** — Add screenshot here
-
----
-
 ## 🔮 Future Improvements
 
 Some potential improvements for future versions:
