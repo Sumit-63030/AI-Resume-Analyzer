@@ -2,7 +2,7 @@
 
 > An AI-powered resume analysis and job matching platform that helps candidates understand their resume quality, identify skill gaps, and tailor their applications to specific job descriptions.
 
-🌐 **Live Demo:** https://ai-resume-analyzer-gu2l84hqz.vercel.app/
+🌐 **Live Demo:** https://ai-resume-analyzer-d1ual1dzh.vercel.app/
 
 📦 **GitHub:** https://github.com/Sumit-63030/AI-Resume-Analyzer
 
