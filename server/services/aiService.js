@@ -72,6 +72,12 @@ const generateAIResponse = async (prompt) => {
 };
 
 export const analyzeResume = async (resumeText) => {
+  const currentDate = new Intl.DateTimeFormat("en-CA", {
+  timeZone: "Asia/Kolkata",
+  year: "numeric",
+  month: "2-digit",
+  day: "2-digit",
+}).format(new Date());
   const prompt = `
 You are an expert ATS Resume Analyzer.
 
@@ -93,9 +99,19 @@ Rules:
 - weaknesses should contain specific weaknesses found in the resume.
 - missingSkills should contain relevant skills that appear to be missing.
 - suggestions should contain actionable improvements.
-- Return ONLY valid JSON.
-- Do not use markdown.
-- Do not wrap the JSON in code fences.
+- Return ONLY valid JSON without markdown or code fences.
+DATE VALIDATION:
+- The authoritative current date is ${currentDate}.
+- Interpret every resume date relative to this date.
+- Never label a past date as a future date.
+- For dates containing only a month and year, compare the month and year with the current month and year.
+- A month/year date in the current month is not automatically a future date.
+- A date range ending in "Present" or "Current" means the activity is ongoing.
+- Do not flag a project, education, or employment date as incorrect merely because it is recent.
+- Only report a future-date issue when the resume provides sufficient evidence that the date is genuinely in the future.
+- If a date is ambiguous, do not make a future-date claim.
+- Never invent dates or inconsistencies.
+
 
 Resume:
 ${resumeText}
